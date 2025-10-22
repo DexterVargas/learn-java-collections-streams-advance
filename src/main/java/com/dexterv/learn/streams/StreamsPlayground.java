@@ -1,12 +1,11 @@
 package com.dexterv.learn.streams;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class LearnStream {
+public class StreamsPlayground {
     public void nameStream() {
 //        List<String> names = new ArrayList<>();
         List<String> names = List.of("Dexter", "John", "Jane","Jane", "Dex");
