@@ -80,5 +80,47 @@ public class CollectionsPlayground {
 
             System.out.println("\t" + department + ": " + salary);
         }
+
+        // 6️⃣ Find highest-paid employee
+        Employee topEarner = employees.stream()
+                .max(Comparator.comparingDouble(Employee::getSalary))
+                .orElseThrow();
+
+        System.out.println("\n Highest-paid employee is: " + topEarner);
+
+        // 7️⃣ Map employee name -> salary
+        Map<String, Double> salaryMap = employees.stream()
+                .collect(Collectors.toMap(Employee::getName, Employee::getSalary));
+
+        System.out.println("\n Map<String, Double> | Map Employee and salary");
+        for (Map.Entry<String, Double> items : salaryMap.entrySet()) {
+            String name = items.getKey();
+            Double salary = salaryMap.get(name);
+            System.out.println("\t" + name + ": " + salary);
+        }
+
+        // Find the TOP 3 earners per Department
+        Map<String, List<Employee>> top3EarnerPerDepartment = employees.stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment,
+                        Collectors.collectingAndThen(
+                                Collectors.toList(),
+                                list -> list.stream()
+                                        .filter(Employee::isActive)
+                                        .sorted(Comparator.comparingDouble(Employee::getSalary).reversed())
+                                        .limit(3)
+                                        .collect(Collectors.toList())
+
+                        )
+                        ));
+
+        System.out.println("\n Get the Top 3 earners per Department");
+        for (Map.Entry<String, List<Employee>> items : top3EarnerPerDepartment.entrySet()) {
+            String department = items.getKey();
+            List<Employee> employeeList = items.getValue();
+            System.out.println("\t" + department + ":");
+            for (Employee employee : employeeList) {
+                System.out.println("\t\t" + employee);
+            }
+        }
     }
 }
