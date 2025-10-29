@@ -122,5 +122,18 @@ public class CollectionsPlayground {
                 System.out.println("\t\t" + employee);
             }
         }
+
+        // Generate a report: Department -> Total Active Employees
+        Map<String, Long> totalActiveEmployeePerDepartment = employees.stream()
+                .filter(Employee::isActive)
+                .collect(Collectors.groupingBy(Employee::getDepartment,
+                        Collectors.counting()));
+
+        System.out.println("\n Total active employees per Department : " +  totalActiveEmployeePerDepartment);
+
+        // TODO: Find employees sharing at least one skill
+        // TODO: Count how many employees have “Java” as a skill
+        // TODO: Convert to JSON (using Jackson) to simulate API response
+        // TODO: Get Employee that have Salary between 85000 ~ 105000
     }
 }
