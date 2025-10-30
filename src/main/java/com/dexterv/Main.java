@@ -2,6 +2,7 @@ package com.dexterv;
 
 import com.dexterv.learn.collections.CollectionsPlayground;
 import com.dexterv.learn.streams.StreamsPlayground;
+import com.dexterv.services.EmployeeService;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,8 +14,9 @@ public class Main {
 
         System.out.println("\n___________________COLLECTIONS____________________\n");
 
-        CollectionsPlayground learnCollection = new CollectionsPlayground();
-        learnCollection.employeeData();
 
+        CollectionsPlayground learnCollection = new CollectionsPlayground();
+//        learnCollection.employeeData();
+        learnCollection.employeeMap();
     }
 }

@@ -1,22 +1,22 @@
 package com.dexterv.learn.collections;
 
 import com.dexterv.domain.Employee;
-import com.dexterv.repository.EmployeeData;
-import org.w3c.dom.ls.LSOutput;
+import com.dexterv.repositories.EmployeeData;
+import com.dexterv.services.EmployeeService;
+import com.dexterv.services.impl.EmployeeServiceImpl;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class CollectionsPlayground {
 
     List<Employee> employees;
 
+    private final EmployeeService employeeService;
 
     public CollectionsPlayground() {
         this.employees = EmployeeData.getEmployees();
+        this.employeeService = new EmployeeServiceImpl(employees);
     }
 
     public void employeeData(){
@@ -135,5 +135,35 @@ public class CollectionsPlayground {
         // TODO: Count how many employees have “Java” as a skill
         // TODO: Convert to JSON (using Jackson) to simulate API response
         // TODO: Get Employee that have Salary between 85000 ~ 105000
+    }
+
+    public void employeeMap(){
+        System.out.println("\n**********____Employee getEmployeeById(int id);");
+        Employee employee = employeeService.getEmployeeById(1);
+        System.out.println(employee);
+        System.out.println(employee.getId() + "\n" + employee.getName() + "\n" + employee.getDepartment() + "\n" + employee.getSalary() + "\n" + employee.isActive() );
+        System.out.println(String.join(", ", employee.getSkills()));
+
+
+        System.out.println("\n**********____List<Employee> getAllEmployees();");
+        List<Employee> allEmployees = employeeService.getAllEmployees();
+        for (Employee employee1 : allEmployees) {
+            System.out.println(employee1);
+        }
+
+        System.out.println("\n**********____List<Employee> getActiveEmployees();");
+        List<Employee> allActiveEmployees = employeeService.getActiveEmployees();
+        for (Employee employee1 : allActiveEmployees) {
+            System.out.println(employee1);
+        }
+
+//        List<Employee> getEmployeesSortedBySalaryDesc();
+//        Set<String> getAllUniqueSkills();
+//        Map<String, Double> getAverageSalaryByDepartment();
+//        Optional<Employee> getTopEarner();
+//        Long countEmployeesWithSkill(String skill);
+//        Map<String, Long> getActiveEmployeeCountByDepartment();
+//        List<Employee> getEmployeesSharingOneSkills();
+//        List<Employee> getEmployeesBetweenSalary( double minSalary, double maxSalary);
     }
 }

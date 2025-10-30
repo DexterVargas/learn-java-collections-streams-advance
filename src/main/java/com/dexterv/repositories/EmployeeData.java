@@ -1,4 +1,4 @@
-package com.dexterv.repository;
+package com.dexterv.repositories;
 
 import com.dexterv.domain.Employee;
 
